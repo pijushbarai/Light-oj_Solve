@@ -3,9 +3,9 @@ using namespace std;
 
 int main()
 {
-    int n, m, a;
-    cin >> n >> m >> a;
-    int p, q;
+   long long  int n, m, a;
+    cin >> n >> m>> a;
+   long long  int p, q;
     if(n%a == 0){
         p = n/a;
     }else p = n/a + 1;

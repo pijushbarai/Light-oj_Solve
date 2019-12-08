@@ -40,12 +40,14 @@ int main()
         	if(i < n){
         		 for(int j = 0; j <= i; j++){
                 	if(j == 0){
-                        banana[i][j] = banana[i-1][j] + baanana[i][j];
+                        banana[i][j] = banana[i-1][j] + banana[i][j];
                     }
-                    else{
+                    else if(j < i){
                         banana[i][j] = max(banana[i-1][j],banana[i-1][j-1]) + banana[i][j];
+                    }else{
+                    	 banana[i][j] = banana[i-1][j-1] + banana[i][j];
                     }
-        		 }
+        		}
         	}
            
             else{

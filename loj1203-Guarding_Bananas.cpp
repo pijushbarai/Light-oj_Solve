@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+stack<pair<double, double>>hull;
 
 double find_slove(std:: pair<double, double>point1,std:: pair<double, double>point2){
     return ((point1.second - point2.second)/(point1.first - point2.first));
@@ -26,6 +27,15 @@ void Sorting_angle(std::pair<double, double>point[] , int n){
         }
 	
 }
+
+void convex_hull(std::pair<double , double>points, int n){
+	hull.push(point[0]);
+	hull.push(point[1]);
+	for(int i = 2; i < n; i++){
+		
+	}
+}
+
 
 int main()
 {

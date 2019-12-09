@@ -1,17 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+double find_slove(std:: pair<double, double>point1,std:: pair<double, double>point2){
+    return ((point1.second - point2.second)/(point1.first - point2.first));
+}
+
 void Sorting_angle(std::pair<double, double>point[] , int n){
 	pair<double, double >temp;
 	for(int i = 1; i < n; i++){
 		for(int j = i+1; j < n; j++){
-			double slovei = ((point[0].second - point[i].second)/(point[0].first - point[i].first));
-			double slovej = ((point[0].second - point[j].second)/(point[0].first - point[j].first));
+			double slovei = find_slove(point[0],point[i]);
+			double slovej = find_slove(point[0],point[j]);
 			if(slovei > slovej){
 				temp = point[i];
 				point[i] = point[j];
 				point[j] = temp;
 			}
+			
 		}
 	}
 	//---printing for checking---??

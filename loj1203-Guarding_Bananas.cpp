@@ -1,7 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-stack<pair<double, double>>hull;
+
+
+void orientation(pair<double,double>p1,pair<double,double>p2,pair<double,double>p3){
+	double s1 = find_slove(p1,p2);
+	double s2 = find_slove(p2,p3);
+	if(s1 > s2){
+		hull.push(p2);
+		hull.push(p3);
+	}else if(s1 == s2){
+		//hull.push();
+	}
+}
 
 double find_slove(std:: pair<double, double>point1,std:: pair<double, double>point2){
     return ((point1.second - point2.second)/(point1.first - point2.first));
@@ -28,10 +39,16 @@ void Sorting_angle(std::pair<double, double>point[] , int n){
 	
 }
 
-void convex_hull(std::pair<double , double>points, int n){
+void convex_hull(std::pair<double , double>point[], int n){
 	hull.push(point[0]);
 	hull.push(point[1]);
 	for(int i = 2; i < n; i++){
+		pair<double, double> p1,p2,p3;
+		p1 = hull.top();
+		hull.pop();
+		p2 = hull.top();
+		p3 = point[i];
+		orientation(p1,p2,p3);
 		
 	}
 }
@@ -63,6 +80,7 @@ int main()
         
         //sorting with angel
         Sorting_angle(point,n);
+        convex_hull(point,n)
         
     }
 

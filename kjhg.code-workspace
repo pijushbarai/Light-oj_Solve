@@ -1,10 +1,11 @@
 {
 	"folders": [
 		{
-			"path": "C:\\MinGW."
+			"path": "C:\\MinGW.",
+			"MinGw"
 		},
 		{
-			"path": "C:\\Users\\Pijush\\Desktop\\RESTfull-CRUD-API"
+			"path": "E:\\Codeblock"
 		}
 	]
 }

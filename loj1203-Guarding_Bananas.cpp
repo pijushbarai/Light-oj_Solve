@@ -13,17 +13,16 @@ d find_slove(std:: pair<d, d>point1,std:: pair<d, d>point2){
 d distance(pair<d,d>p1, pair<d,d>p2){
 	return sqrt(pow((p1.first - p2.first), 2) + pow((p1.second - p2.second), 2));
 }
-void orientation(pair<d,d>p1,pair<d,d>p2,pair<d,d>p3){
+int orientation(pair<d,d>p1,pair<d,d>p2,pair<d,d>p3){
 	//	cout << "P1 = " <<p1.first << " " << p1.second << endl;
 	//	cout << "P2 = " <<p2.first << " " << p2.second << endl;
 	//	cout << "P3 = " <<p3.first << " " << p3.second << endl;
-	d slv1 = find_slove(p1,p2);
-	d slv2 = find_slove(p2,p3);
+	d value = ((p1.second-p2.second)*(p2.first - p3.first) - (p1.first-p2.first)*(p2.second - p3.second)); 
 	
-	if(slv1 < slv2){
+	if(value < 0){
 		hull.push(p2);
 		hull.push(p3);
-	}else if(slv1 == slv2){
+	}else if(value == 0){
 		d x = distance(p1,p2);
 		d y = distance(p1,p3);
 		if(x > y){
@@ -33,21 +32,24 @@ void orientation(pair<d,d>p1,pair<d,d>p2,pair<d,d>p3){
 		}
 		
 	}else{
-		hull.push(p2);
+		return -1;
 	}
+    return 0;
 }
 
 
 void convex_hull(std::pair<d , d>point[], int n){
 	hull.push(point[0]);
 	hull.push(point[1]);
+    pair<d , d> p1,p2,p3;
 	for(int i = 2; i < n; i++){
-		pair<d , d> p1,p2,p3;
+		
 		p2 = hull.top();
 		hull.pop();
 		p1 = hull.top();
 		p3 = point[i];
-		orientation(p1,p2,p3);
+		int x = orientation(p1,p2,p3);
+        i = i + x;
 		
 	}
 }
@@ -72,10 +74,6 @@ void Sorting_angle(std::pair<d, d>point[] , int n){
 					temp = point[i];
 					point[i] = point[j];
 					point[j] = temp;
-				}else{
-					temp = point[j];
-					point[j] = point[i];
-					point[i] = temp;
 				}
 			}
 			
@@ -83,17 +81,18 @@ void Sorting_angle(std::pair<d, d>point[] , int n){
 	}
 	//---printing for checking---??
 	//cout << "-------------" << endl;
-	//for(int i = 0; i < n; i++){
-	//	cout << i << " = " << point[i].first << " " << point[i].second << endl;
-	//}
+	// for(int i = 0; i < n; i++){
+	// 	cout << i << " = " << point[i].first << " " << point[i].second << endl;
+	// }
 	
 }
 
 
 int main()
 {
-    int test, t = 0, n, j;
+    int test = 1, t = 0, n, j;
     pair <d,d>key;
+    //freopen("input.txt","r",stdin);
     cin >> test;
     while(test--){
         t++;
@@ -110,26 +109,28 @@ int main()
         	}
         	point[j+1] = key;
         }
-        //----printing pair---->>
-        //for(int i = 0; i < n; i++){
-        //    cout << i << " = " << point[i].first << " " << point[i].second << endl;
-        //}
-       // cout << "Initial = " << initial.first << " " << initial.second << endl;
+        //----PRINTING PAIR---->>
+       
+       // COUT << "INITIAL = " << INITIAL.FIRST << " " << INITIAL.SECOND << ENDL;
        
 
 
         //-------sorting with angel------
         Sorting_angle(point,n );
         convex_hull(point,n);
+        //  for(int i  = 0; i < n; i++){
+        // 	cout << point[i].first << " " << point[i].second << endl;
+        // }
         
-        cout << "Hull size = " << hull.size() << endl;
-        
+        //cout << "Hull size = " << hull.size() << endl;
+       // pair<d,d>ch,dhorerakhi = hull.top();
+        //d sum = 0;
+        pair<d,d>ch;
       while(!hull.empty()){
-        	pair<d,d>ch = hull.top();
-        	cout << ch.first << " " << ch.second << endl;
-        	hull.pop();
+        	ch = hull.top();
+			cout << ch.first << " " << ch.second << endl;
+            hull.pop();
         }
-        
         
     }
 

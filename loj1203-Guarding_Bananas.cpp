@@ -91,6 +91,7 @@ void Sorting_angle(std::pair<d, d>point[] , int n){
 int main()
 {
     int test = 1, t = 0, n, j;
+    d a, b, c, q, r;
     pair <d,d>key;
     //freopen("input.txt","r",stdin);
     cin >> test;
@@ -125,12 +126,48 @@ int main()
         //cout << "Hull size = " << hull.size() << endl;
        // pair<d,d>ch,dhorerakhi = hull.top();
         //d sum = 0;
-        pair<d,d>ch;
-      while(!hull.empty()){
+        pair<d,d>ch, fst,p1, cnt, p2;
+        
+     /* while(!hull.empty()){
         	ch = hull.top();
 			cout << ch.first << " " << ch.second << endl;
             hull.pop();
+        }*/
+        d m  = 1289988;
+        fst = hull.top();
+        p1 = fst;
+        hull.pop();
+        cnt = hull.top();
+        hull.top();
+        
+        while(!hull.empty()){
+        	p2 = hull.top();
+        	a = distance(p1,cnt);
+        	b = distance(p2, cnt);
+        	c = distance(p1, p2);
+        	q = (pow(a, 2) + pow(b, 2) - pow(c,2));
+        	r = 2*a*b;
+        	d angle = acos(q/r);
+        	if(angle < m){
+        		m = angle;
+        	}
+        	hull.pop();
+        	p1 = cnt;
+        	cnt = p2;
         }
+        p2 = fst;
+    
+        a = distance(p1,cnt);
+       	b = distance(p2, cnt);
+       	c = distance (p1,p2);
+       	q = (pow(a, 2) + pow(b, 2) - pow(c,2));
+       	r = 2*a*b;
+       	d angle = acos(q/r);
+       	if(angle < m){
+       		m = angle;
+       	}
+        
+        cout << angle << endl;
         
     }
 
